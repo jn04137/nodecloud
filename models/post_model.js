@@ -1,14 +1,14 @@
 const post_schema = "CREATE TABLE IF NOT EXISTS POST("+
-	"POST# INT(25) NOT NULL UNIQUE,"+
-	" Email VARCHAR(255),"+
-	" BlogID INT,"+
-	" Archived BOOL,"+ 
-	" Title VARCHAR(100) NOT NULL,"+
+	"PostNum INT(255),"+
+	" Email VARCHAR(100),"+
+	" BlogID INT(255),"+
+	" Archived BOOLEAN,"+
+	" Title VARCHAR(150),"+
 	" Text LONGTEXT,"+
 	" Time TIMESTAMP,"+
 	" Date DATE,"+
-	" PRIMARY KEY (POST#),"+
+	" PRIMARY KEY (PostNum),"+
 	" FOREIGN KEY (Email) REFERENCES USER(Email),"+
-	" FOREIGN KEY (BlogID) REFERENCES BLOG(BlogID));"
+	" FOREIGN KEY(BlogID) REFERENCES BLOG(BlogID))";
 
 exports.post_schema = post_schema;

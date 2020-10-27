@@ -1,5 +1,5 @@
 const user_schema = "CREATE TABLE IF NOT EXISTS USER(" + 
-	"Email VARCHAR(255) NOT NULL UNIQUE," + 
+	"Email VARCHAR(100) NOT NULL UNIQUE," + 
 	" DisplayName VARCHAR(255) NOT NULL," + 
 	" Password VARCHAR(255) NOT NULL,"+
 	" FirstN VARCHAR(255) NOT NULL,"+

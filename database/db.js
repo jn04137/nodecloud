@@ -26,7 +26,6 @@ const blog_schema = require('../models/blog_model').blog_schema;
 con.query(blog_schema, (err, res) => {
 	if (err) {
 		console.log(err);
-		return;
 	};
 	console.log('Blog table created');
 });
@@ -36,7 +35,6 @@ const post_schema = require('../models/post_model').post_schema;
 con.query(post_schema, (err, res) => {
 	if (err) {
 		console.log(err);
-		return;
 	}
 	console.log('Post table created');
 })
