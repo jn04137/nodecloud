@@ -18,5 +18,18 @@ exports.user_signup = (req, res) => {
 }
 
 exports.user_login = (req, res) => {
-	res.send('This is the login controller');
+	sql_query = `SELECT Password from USER where Email='${req.body.Email}'`;
+	database.query(sql_query, (err, res) => {
+		if (err) console.log(err);
+		console.log(res[0].Password);
+		bcrypt.compare(req.body.Password, res[0].Password, (err, res) => {
+			if(res){
+				console.log('password matches');
+			} else {
+				console.log('Password does not match or user does not exist');
+			}	
+		});
+	});
+
+	res.send("This is the login controller!");
 }
