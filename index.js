@@ -1,13 +1,14 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 
 var options = {
-	host: 'localhost',
-	user: 'admin',
-	password: 'password', 
-	database: 'cloudhealth'
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASSWORD, 
+	database: process.env.DATABASE
 }
 
 const sessionStore = new MySQLStore();
