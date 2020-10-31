@@ -2,6 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const session = require('express-session');
+
+// Make sure to setup privileges for user in the 
+// database for session to work properly
+// do not flush privileges after setting up user
+
 const MySQLStore = require('express-mysql-session')(session);
 
 var options = {
@@ -11,7 +16,7 @@ var options = {
 	database: process.env.DATABASE
 }
 
-const sessionStore = new MySQLStore();
+const sessionStore = new MySQLStore(options);
 
 const PORT = 3000;
 
@@ -26,7 +31,9 @@ app.use(session({
 	saveUninitialized: false
 }));
 
+// Adds the routers (URL endpoints) to the application
 app.use('/user', require('./routes/user_router'));
+app.use('/restricted', require('./routes/restricted_router'));
 
 app.get('/', (req, res) => {
 	res.send('Hello World!');

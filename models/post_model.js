@@ -1,5 +1,5 @@
 const post_schema = "CREATE TABLE IF NOT EXISTS POST("+
-	"PostNum INT(255),"+
+	"PostNum INT(11) NOT NULL AUTO_INCREMENT,"+
 	" Email VARCHAR(100),"+
 	" BlogID INT(255),"+
 	" Archived BOOLEAN,"+

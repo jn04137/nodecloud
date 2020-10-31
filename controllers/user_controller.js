@@ -17,19 +17,17 @@ exports.user_signup = (req, res) => {
 	})	
 }
 
-exports.user_login = (req, res) => {
-	sql_query = `SELECT Password from USER where Email='${req.body.Email}'`;
-	database.query(sql_query, (err, res) => {
-		if (err) console.log(err);
-		console.log(res[0].Password);
-		bcrypt.compare(req.body.Password, res[0].Password, (err, res) => {
-			if(res){
+exports.user_login = (request, response) => {
+	sql_query = `SELECT * from USER where Email='${request.body.Email}'`;
+	database.query(sql_query, (err, dbResult) => {
+		bcrypt.compare(request.body.Password, dbResult[0].Password, (err, compResult) => {
+			if(compResult){
 				console.log('password matches');
+				request.session.user = dbResult[0].Email;
+				response.redirect('/restricted');
 			} else {
-				console.log('Password does not match or user does not exist');
-			}	
-		});
+				console.log('password does not match');
+			}
+		});	
 	});
-
-	res.send("This is the login controller!");
 }

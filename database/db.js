@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -15,10 +15,10 @@ con.connect((err)=> {
 // Creating user table
 const user_schema = require('../models/user_model').user_schema;
 con.query(user_schema,(err, res) => {
-		if(err) {
-			console.log(err);
-		}
-		console.log('User table created');
+	if(err) {
+		console.log(err);
+	}
+	console.log('User table created');
 });
 
 // Creating Blog table
