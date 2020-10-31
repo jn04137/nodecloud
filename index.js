@@ -40,8 +40,8 @@ app.use(function(request, response, next) {
 app.use('/user', require('./routes/user_router'));
 app.use('/restricted', require('./routes/restricted_router'));
 
-app.get('/', (req, res) => {
-	res.send('Hello World!');
+app.get('/', (request, result) => {
+	result.send('Hello World!');
 });
 
 app.listen(PORT, () => {

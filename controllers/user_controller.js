@@ -3,13 +3,20 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
-exports.user_signup = (req, res) => {
-	bcrypt.genSalt(saltRounds, (err, salt)=> {
-		bcrypt.hash(req.body.Password, salt, (err, hash) => {
-			let sql_query = `INSERT INTO USER (Email, DisplayName, Password, FirstN, MidInitial, LastN) VALUES ('${req.body.Email}', '${req.body.DisplayName}', '${hash}', '${req.body.FirstN}', '${req.body.MidInitial}', '${req.body.LastN}')`;
-			database.query(sql_query, (err, res) => {
-				if(err) console.log(err);
-				console.log('New user: ' + req.body.DisplayName + ' created');
+function isAuthenticated(request, result, next){
+	if(request.session.user){
+		return next();
+	} else {
+		result.redirect('/user');
+	}
+}
+exports.user_signup = (request, response) => {
+	bcrypt.genSalt(saltRounds, (saltErr, salt)=> {
+		bcrypt.hash(request.body.Password, salt, (hashErr, hash) => {
+			let sql_query = `INSERT INTO USER (Email, DisplayName, Password, FirstN, MidInitial, LastN) VALUES ('${request.body.Email}', '${request.body.DisplayName}', '${hash}', '${request.body.FirstN}', '${request.body.MidInitial}', '${request.body.LastN}')`;
+			database.query(sql_query, (queryErr, result) => {
+				if(queryErr) console.log(queryErr);
+				console.log('New user: ' + request.body.DisplayName + ' created');
 			});
 
 			res.send('Congrats! You just made an account!');
