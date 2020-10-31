@@ -23,7 +23,8 @@ exports.user_login = (request, response) => {
 		bcrypt.compare(request.body.Password, dbResult[0].Password, (err, compResult) => {
 			if(compResult){
 				console.log('password matches');
-				request.session.user = dbResult[0].Email;
+				console.log(dbResult[0]);
+				request.session.user = dbResult[0];
 				response.redirect('/restricted');
 			} else {
 				console.log('password does not match');

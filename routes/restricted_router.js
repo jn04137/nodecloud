@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', (err, res) => {
-	res.render('restricted/main');
+router.get('/', (request, response) => {
+	let user = request.session.user;
+	response.render('restricted/main');
 });
 
 module.exports = router;

@@ -31,6 +31,11 @@ app.use(session({
 	saveUninitialized: false
 }));
 
+app.use(function(request, response, next) {
+	response.locals.user = request.session.user;
+	next();
+});
+
 // Adds the routers (URL endpoints) to the application
 app.use('/user', require('./routes/user_router'));
 app.use('/restricted', require('./routes/restricted_router'));
