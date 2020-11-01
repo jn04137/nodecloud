@@ -1,4 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<p>Hello, <%= user.DisplayName %>, you have successfully logged in!</p>
+	
+	<br>
+
+	<p>Create a blog!</p>
+	<form action="/blog/create">
+		<input type="text" placeholder="BlogName" name="BlogName">
+		<input type="text" placeholder="Field" name="Field">
+	</form>
+
 </html>

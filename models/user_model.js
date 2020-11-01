@@ -1,4 +1,4 @@
-const user_schema = "CREATE TABLE IF NOT EXISTS USER(" + 
+const user_schema = "CREATE TABLE USER(" + 
 	"Email VARCHAR(100) NOT NULL UNIQUE," + 
 	" DisplayName VARCHAR(10) NOT NULL," + 
 	" Password VARCHAR(150) NOT NULL,"+

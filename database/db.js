@@ -16,27 +16,40 @@ con.connect((connectError)=> {
 const user_schema = require('../models/user_model').user_schema;
 con.query(user_schema,(queryError, queryResult) => {
 	if(queryError) {
-		console.log(queryError);
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log('Table "USER" created')
 	}
-	console.log('User table created');
+});
+
+// Creating admin table
+const admin_schema = require('../models/admin_model').admin_schema;
+con.query(admin_schema, (queryError, queryResult) => {
+	if(queryError){
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log('Table "ADMIN" created');
+	}
 });
 
 // Creating Blog table
 const blog_schema = require('../models/blog_model').blog_schema;
 con.query(blog_schema, (queryError, queryResult) => {
 	if (queryError) {
-		console.log(queryError);
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log('Table "BLOG" created');
 	}
-	console.log('Blog table created');
 });
 
 // Creating Post table
 const post_schema = require('../models/post_model').post_schema;
 con.query(post_schema, (queryError, queryResult) => {
 	if (queryError) {
-		console.log(queryError);
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log('Table "POST" created');
 	}
-	console.log('Post table created');
 });
 
 

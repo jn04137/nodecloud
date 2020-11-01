@@ -3,35 +3,36 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
-function isAuthenticated(request, result, next){
-	if(request.session.user){
-		return next();
-	} else {
-		result.redirect('/user');
-	}
-}
 exports.user_signup = (request, response) => {
-	bcrypt.genSalt(saltRounds, (saltErr, salt)=> {
-		bcrypt.hash(request.body.Password, salt, (hashErr, hash) => {
+	bcrypt.genSalt(saltRounds, (saltError, salt)=> {
+		bcrypt.hash(request.body.Password, salt, (hashError, hash) => {
 			let sql_query = `INSERT INTO USER (Email, DisplayName, Password, FirstN, MidInitial, LastN) VALUES ('${request.body.Email}', '${request.body.DisplayName}', '${hash}', '${request.body.FirstN}', '${request.body.MidInitial}', '${request.body.LastN}')`;
-			database.query(sql_query, (queryErr, result) => {
-				if(queryErr) console.log(queryErr);
-				console.log('New user: ' + request.body.DisplayName + ' created');
+			database.query(sql_query, (queryError, queryResult) => {
+				if(queryError){
+					if(queryError.code === 'ER_DUP_ENTRY'){
+						response.send('User with this email already exists');
+					} else{
+						console.log(queryError);
+					}
+				} else {
+					console.log('New user: ' + request.body.DisplayName + ' created');
+					response.redirect('/user');
+				}
 			});
 
-			res.send('Congrats! You just made an account!');
-		})
-	})	
+		});
+	});	
 }
 
 exports.user_login = (request, response) => {
-	sql_query = `SELECT * from USER where Email='${request.body.Email}'`;
-	database.query(sql_query, (err, dbResult) => {
-		bcrypt.compare(request.body.Password, dbResult[0].Password, (err, compResult) => {
+	let sql_query = `SELECT * from USER where Email='${request.body.Email}'`;
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError) console.log(queryError.sqlMessage);
+		bcrypt.compare(request.body.Password, queryResult[0].Password, (compError, compResult) => {
 			if(compResult){
 				console.log('password matches');
-				console.log(dbResult[0]);
-				request.session.user = dbResult[0];
+				console.log(queryResult[0]);
+				request.session.user = queryResult[0];
 				response.redirect('/restricted');
 			} else {
 				console.log('password does not match');

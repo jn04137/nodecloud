@@ -1,10 +1,7 @@
 const database = require('../database/db').con;
 
-function isAuthenticated(request, result, next) {
-	if(request.session.user){
-		return next();
-	} else {
-		result.redirect('/user');
-	}
+exports.create_post = (request, response) => {
+	
+	database.query()	
 }
 

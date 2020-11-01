@@ -39,6 +39,7 @@ app.use(function(request, response, next) {
 // Adds the routers (URL endpoints) to the application
 app.use('/user', require('./routes/user_router'));
 app.use('/restricted', require('./routes/restricted_router'));
+app.use('/blog', require('./routes/blog_router.js'));
 
 app.get('/', (request, result) => {
 	result.send('Hello World!');
