@@ -38,8 +38,10 @@ exports.user_login = (request, response) => {
 				console.log(queryResult[0]);
 				request.session.user = queryResult[0];
 				response.redirect('/restricted');
-			} else {
+			}
+			else {
 				console.log('password does not match');
+				response.redirect('/user');
 			}
 		});	
 	});

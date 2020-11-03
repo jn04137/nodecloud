@@ -1,10 +1,10 @@
 const post_schema = "CREATE TABLE POST("+
 	"PostNum INT NOT NULL AUTO_INCREMENT,"+
-	" Email VARCHAR(100),"+
-	" BlogID INT,"+
+	" Email VARCHAR(100) NOT NULL,"+
+	" BlogID INT NOT NULL,"+
 	" Archived BOOLEAN,"+
-	" Title VARCHAR(150),"+
-	" Text LONGTEXT,"+
+	" Title VARCHAR(150) NOT NULL,"+
+	" Text LONGTEXT NOT NULL,"+
 	" Time TIMESTAMP,"+
 	" Date DATE,"+
 	" PRIMARY KEY (PostNum),"+
