@@ -15,6 +15,8 @@ function isAuthenticated(request, response, next) {
 	}
 }
 
+// renders the restricted page
+// route: '/restricted'
 router.get('/', isAuthenticated,restricted_controller.restricted_home);
 
 module.exports = router;

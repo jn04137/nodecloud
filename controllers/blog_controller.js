@@ -1,5 +1,9 @@
 const database = require('../database/db.js').con;
 
+exports.blog_page = (request, response) => {
+	response.render('blog/blog_page');
+}
+
 // Create blog; Will only be available on the admin dash
 exports.create_blog = (request, response) => {
 	let sql_query = `INSERT INTO BLOG (BlogName, Field) VALUES ('${request.body.BlogName}', '${request.body.Field}')`	

@@ -6,7 +6,7 @@ const user_schema = "CREATE TABLE USER(" +
 	" MidInitial CHAR,"+
 	" LastN VARCHAR(20) NOT NULL,"+
 	" Signature VARCHAR(255),"+
-	" PostCount INT(25),"+
+	" PostCount INT,"+
 	" PRIMARY KEY (Email))";
 
 exports.user_schema = user_schema;

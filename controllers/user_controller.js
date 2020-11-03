@@ -3,6 +3,10 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
+exports.user_home = (request, response) => { 
+	response.render('user/signup_login');
+}
+
 exports.user_signup = (request, response) => {
 	bcrypt.genSalt(saltRounds, (saltError, salt)=> {
 		bcrypt.hash(request.body.Password, salt, (hashError, hash) => {

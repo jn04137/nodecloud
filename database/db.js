@@ -52,5 +52,14 @@ con.query(post_schema, (queryError, queryResult) => {
 	}
 });
 
+const comment_schema = require('../models/comment_model').comment_schema;
+con.query(comment_schema, (queryError, queryResult) => {
+	if(queryError) {
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log("Table 'COMMENT' created");
+	}
+});
+
 
 exports.con = con;

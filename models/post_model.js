@@ -1,7 +1,7 @@
 const post_schema = "CREATE TABLE POST("+
-	"PostNum INT(11) NOT NULL AUTO_INCREMENT,"+
+	"PostNum INT NOT NULL AUTO_INCREMENT,"+
 	" Email VARCHAR(100),"+
-	" BlogID INT(100),"+
+	" BlogID INT,"+
 	" Archived BOOLEAN,"+
 	" Title VARCHAR(150),"+
 	" Text LONGTEXT,"+
