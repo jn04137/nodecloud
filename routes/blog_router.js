@@ -4,8 +4,13 @@ const blog_controller = require('../controllers/blog_controller');
 
 // Renders a page consisting of a list of blogs
 router.get('/', blog_controller.blog_list_page);
+
 // route is "/blog/create"
 router.post('/create', blog_controller.create_blog);
+
+// TODO route generate page for blog category
+// blog_cat is short for blog category
+router.get('/blog/category/:blog_cat', );
 
 // route is "/blog/delete"
 router.delete('/delete', blog_controller.delete_blog);
