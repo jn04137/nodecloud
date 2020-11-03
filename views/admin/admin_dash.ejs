@@ -2,4 +2,10 @@
 
 <html>
 	<p>Hello admin, <%= user.DisplayName %>.</p>
+
+	<p>Create a blog!</p>
+	<form action="/blog/create" method="post">
+		<input type="text" placeholder="BlogName" name="BlogName">
+		<input type="text" placeholder="Field" name="Field">
+	</form>
 </html>

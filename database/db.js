@@ -18,7 +18,7 @@ con.query(user_schema,(queryError, queryResult) => {
 	if(queryError) {
 		console.log(queryError.sqlMessage);
 	} else {
-		console.log('Table "USER" created')
+		console.log("Table 'USER' created")
 	}
 });
 
@@ -28,7 +28,7 @@ con.query(admin_schema, (queryError, queryResult) => {
 	if(queryError){
 		console.log(queryError.sqlMessage);
 	} else {
-		console.log('Table "ADMIN" created');
+		console.log("Table 'ADMIN' created");
 	}
 });
 
@@ -38,7 +38,7 @@ con.query(blog_schema, (queryError, queryResult) => {
 	if (queryError) {
 		console.log(queryError.sqlMessage);
 	} else {
-		console.log('Table "BLOG" created');
+		console.log("Table 'BLOG' created");
 	}
 });
 
@@ -48,7 +48,7 @@ con.query(post_schema, (queryError, queryResult) => {
 	if (queryError) {
 		console.log(queryError.sqlMessage);
 	} else {
-		console.log('Table "POST" created');
+		console.log("Table 'POST' created");
 	}
 });
 
