@@ -6,11 +6,11 @@
 		<% for (var i = 0; i < queryResult.length; i++) { %> 
 			<li> 
 				<p> 
-				<a href="/blog/category/<%= queryResult[i].BlogName %>"> 
+				<a href="/blog/category/<%= queryResult[i].BlogName %>/<%= queryResult[i].BlogID %>"> 
 						<%= queryResult[i].BlogName %>
 				</a>
 				</p>
-				<p><%= queryResult[i].Field %></p>			
+				<p><%= queryResult[i].DescField %></p>			
 			</li>
 		<% } %>
 	</ul>

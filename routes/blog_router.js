@@ -10,7 +10,7 @@ router.post('/create', blog_controller.create_blog);
 
 // TODO route generate page for blog category
 // blog_cat is short for blog category
-router.get('/blog/category/:blog_cat', );
+router.get('/category/:blog_cat/:blog_code', blog_controller.blog_cat_page);
 
 // route is "/blog/delete"
 router.delete('/delete', blog_controller.delete_blog);

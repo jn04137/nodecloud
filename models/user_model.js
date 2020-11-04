@@ -9,4 +9,11 @@ const user_schema = "CREATE TABLE USER(" +
 	" PostCount INT,"+
 	" PRIMARY KEY (Email))";
 
+const credentials_schema = "CREATE TABLE CREDENTIALS("+
+	"UserEmail VARCHAR(100) NOT NULL, "+
+	" Credential VARCHAR(128), "+
+	" PRIMARY KEY (UserEmail), "+
+	" FOREIGN KEY (UserEmail) REFERENCES USER(Email))"
+
 exports.user_schema = user_schema;
+exports.credentials_schema = credentials_schema;

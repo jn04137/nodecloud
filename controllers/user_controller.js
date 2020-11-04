@@ -7,6 +7,7 @@ exports.user_home = (request, response) => {
 	response.render('user/signup_login');
 }
 
+// This is the user sign-up controller
 exports.user_signup = (request, response) => {
 	bcrypt.genSalt(saltRounds, (saltError, salt)=> {
 		bcrypt.hash(request.body.Password, salt, (hashError, hash) => {
@@ -28,6 +29,7 @@ exports.user_signup = (request, response) => {
 	});	
 }
 
+// This is the user sign-in controller
 exports.user_login = (request, response) => {
 	let sql_query = `SELECT * from USER where Email='${request.body.Email}'`;
 	database.query(sql_query, (queryError, queryResult) => {
