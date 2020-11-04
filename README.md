@@ -12,3 +12,5 @@ Before running the application,
 
 You are now good to go!
 Type "node index.js" to run the application
+
+This prototype simulates an online forum where regular user and health professionals can discuss health related topics. The goal of this concept is for the individuals participating to become more educated through discourse with professionals.
