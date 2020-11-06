@@ -8,7 +8,6 @@ router.get('/', blog_controller.blog_list_page);
 // route is "/blog/create"
 router.post('/create', blog_controller.create_blog);
 
-// TODO route generate page for blog category
 // blog_cat is short for blog category
 router.get('/category/:blog_cat/:blog_code', blog_controller.blog_cat_page);
 

@@ -12,9 +12,9 @@ exports.blog_list_page = (request, response) => {
 	});
 }
 
-// TODO check if this works
+// TODO check if this works; "cat" stands for category
 exports.blog_cat_page = (request, response) => {
-	let sql_query = `SELECT * FROM POST WHERE Title='${request.params.blog_code}'`	
+	let sql_query = `SELECT * FROM POST WHERE BlogID='${request.params.blog_code}'`	
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);

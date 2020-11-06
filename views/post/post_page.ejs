@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h2><%= post_info.Title %></h2>
+		<p><%=post_info.Text%></p>
+
+		<form action="/comment/create" method="post">
+			<input type="hidden" name="PostNum" value=<%=post_info.PostNum%>>
+			<input type="text" placeholder="Content" name="Content">
+			<input type="submit" value="Create Comment">
+		</form>
+
+		<% for(var i = 0; i < comments.length; i++) { %> 
+			<p><%= comments[i].Content %></p>			
+			<p><%= comments[i].Email %></p> 		
+		<% } %>
+
+	</body>
+</html>
