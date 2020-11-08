@@ -3,10 +3,11 @@
 	<head>
 		<title> <%=post_info.Title %> </title>
 	</head>
-	<%- include('../partials/header'); %>
+	<%- include('../partials/header') %>
+	<%- include('../partials/navbar') %>
 	<body>
 		<div class="center-div">
-			<h2><%= post_info.Title %></h2>
+			<h3><%= post_info.Title %></h3>
 			<p><%=post_info.Text%></p>
 
 			<form action="/comment/create" method="post">
@@ -16,9 +17,13 @@
 				<input type="submit" value="Create Comment">
 			</form>
 
+			<br>
+
 			<% for(var i = 0; i < comments.length; i++) { %> 
-				<p><%= comments[i].Content %></p>			
-				<p><%= comments[i].Email %></p> 		
+				<%= comments[i].Content %>
+				<br>
+				<%= comments[i].Email %>
+				<br>	
 			<% } %>
 		</div>
 	</body>

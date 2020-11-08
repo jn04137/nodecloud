@@ -26,7 +26,6 @@ exports.blog_cat_page = (request, response) => {
 
 			// On success, the following lines with query for the corresponding posts
 			blog_info = queryResult[0];
-			console.log(blog_info);
 			sql_query = `SELECT * FROM POST WHERE BlogID='${request.params.blog_code}'`	
 			database.query(sql_query, (queryError, queryResult) => {
 				if(queryError){

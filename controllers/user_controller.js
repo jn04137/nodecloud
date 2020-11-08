@@ -84,3 +84,13 @@ exports.user_login = (request, response) => {
 		});	
 	});
 }
+
+exports.user_logout = (request, response) => {
+	request.session.destroy((err) => {
+		if(err){
+			console.log(err);
+		} else {
+			response.redirect('/user');
+		}
+	});
+}
