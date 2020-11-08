@@ -12,18 +12,32 @@ exports.blog_list_page = (request, response) => {
 	});
 }
 
-// TODO check if this works; "cat" stands for category
+// Queries information for blog first and then queries for list of posts
 exports.blog_cat_page = (request, response) => {
-	let sql_query = `SELECT * FROM POST WHERE BlogID='${request.params.blog_code}'`	
+	let blog_info;
+	let posts;
+
+	// Query for blog info occurs in the following line
+	let sql_query = `SELECT * FROM BLOG WHERE BlogID='${request.params.blog_code}'`
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);
-			response.redirect('/blog');
 		} else {
-			response.render('blog/blog_page', {
-					posts: queryResult, 
-					cat_title: request.params.blog_cat,
-					BlogID: request.params.blog_code
+
+			// On success, the following lines with query for the corresponding posts
+			blog_info = queryResult[0];
+			console.log(blog_info);
+			sql_query = `SELECT * FROM POST WHERE BlogID='${request.params.blog_code}'`	
+			database.query(sql_query, (queryError, queryResult) => {
+				if(queryError){
+					console.log(queryError.sqlMessage);
+					response.redirect('/blog');
+				} else {
+					response.render('blog/blog_page', {
+							posts: queryResult, 
+							blog: blog_info
+					});
+				}
 			});
 		}
 	});
@@ -48,7 +62,7 @@ exports.delete_blog = (request, response) => {
 	let sql_query = `DELETE FROM BLOG WHERE BlogName=${request.body.BlogName}`;
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError) {
-			console.log(queryError)
+			console.log(queryError);
 		} else {
 			console.log(`Blog: ${BlogName} has been deleted`);
 		}

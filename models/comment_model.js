@@ -3,7 +3,7 @@ const comment_schema = "CREATE TABLE COMMENT("+
 	" Email VARCHAR(100) NOT NULL," +
 	" PostNum INT NOT NULL," +
 	" Content LONGTEXT NOT NULL,"+
-	" PRIMARY KEY (CommentID),"+
+	" PRIMARY KEY (CommentID, PostNum, Email),"+
 	" FOREIGN KEY (Email) REFERENCES USER(Email), "+
 	" FOREIGN KEY (PostNum) REFERENCES POST(PostNum))"
 

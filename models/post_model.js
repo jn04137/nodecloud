@@ -7,7 +7,7 @@ const post_schema = "CREATE TABLE POST("+
 	" Text LONGTEXT NOT NULL,"+
 	" Time TIMESTAMP,"+
 	" Date DATE,"+
-	" PRIMARY KEY (PostNum),"+
+	" PRIMARY KEY (PostNum, BlogID, Email),"+
 	" FOREIGN KEY (Email) REFERENCES USER(Email),"+
 	" FOREIGN KEY(BlogID) REFERENCES BLOG(BlogID))";
 

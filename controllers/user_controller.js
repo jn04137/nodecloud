@@ -7,6 +7,42 @@ exports.user_home = (request, response) => {
 	response.render('user/signup_login');
 }
 
+exports.your_profile = (request, response) => {
+	let user_email = request.session.user.Email;	
+	let user_info;	
+	let list_of_posts;
+	let list_of_comments;
+	let sql_query = `SELECT * FROM USER WHERE Email='${user_email}'`	
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError){
+			console.log(queryError);
+		} else {
+			user_info = queryResult[0];
+			sql_query = `SELECT * FROM POST WHERE Email='${user_email}'`	
+			database.query(sql_query, (queryError, queryResult) => {
+				if(queryError){
+					console.log(queryError);
+				} else {
+					list_of_posts = queryResult;
+					sql_query = `SELECT * FROM COMMENT WHERE Email='${user_email}'`
+					database.query(sql_query, (queryError, queryResult) => {
+						if(queryError){
+							console.log(queryError);
+						} else {
+							list_of_comments = queryResult;
+							response.render('user/profile_page', {
+								user: user_info,
+								posts: list_of_posts,
+								comments: list_of_comments
+							});
+						}
+					});
+				}
+			});		
+		}
+	});
+}
+
 // This is the user sign-up controller
 exports.user_signup = (request, response) => {
 	bcrypt.genSalt(saltRounds, (saltError, salt)=> {

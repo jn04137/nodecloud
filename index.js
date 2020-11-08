@@ -20,6 +20,8 @@ const sessionStore = new MySQLStore(options);
 
 const PORT = 3000;
 
+app.use(express.static(__dirname + '/public'));
+
 app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
@@ -43,8 +45,8 @@ app.use('/comment', require('./routes/comment_router'));
 app.use('/admin', require('./routes/admin_router'));
 app.use('/post', require('./routes/post_router'));
 
-app.get('/', (request, result) => {
-	result.send('Hello World!');
+app.get('/', (request, response) => {
+	response.redirect('/user');
 });
 
 app.listen(PORT, () => {

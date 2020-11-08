@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+	<h1>User profile</h1>
+	
+	<div>
+		<h3>User Info</h3>
+		<%= user.Email %>
+		<br>
+		<%= user.DisplayName %>
+		<br>
+		<%= user.FirstN %>
+		<br>
+		<%= user.LastN %>
+	</div>
+	<div>
+		<h3>Posts Made</h3>
+		<% for(var i = 0; i < posts.length; i++) { %>
+			<%=posts[i].Title%>
+			<br>
+			<%=posts[i].Text%>
+		<% }%>
+	</div>
+	<div>
+		<h3>Comments Made</h3>
+		<% for(var i = 0; i < comments.length; i++) { %>
+			<%= comments[i].Content %>
+		<% }%>
+	</div>
+</html>
