@@ -15,11 +15,13 @@ exports.create_post = (request, response) => {
 
 exports.delete_post = (request, response) => {
 	let sql_query = `DELETE FROM POST WHERE PostNum='${request.body.PostNum}'`;
+	console.log(request.body.PostNum);
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
-			console.log(queryError.sqlsqlMessage)
+			console.log(queryError.sqlsqlMessage);
 		} else {
 			console.log('Post was successfully deleted');
+			response.redirect('/user/your_profile');
 		}
 	});
 }

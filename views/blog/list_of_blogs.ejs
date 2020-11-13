@@ -5,19 +5,21 @@
 	</head>
 	<%- include('../partials/header') %>
 	<%- include('../partials/navbar') %>
-	<div class="center-div">
+	
+	<div class="container">
 	<p>List of blogs</p>
-
-	<ul>
-		<% for (var i = 0; i < queryResult.length; i++) { %> 
-			<li> 
-				<a href="/blog/category/<%= queryResult[i].BlogName %>/<%= queryResult[i].BlogID %>"> 
-						<%= queryResult[i].BlogName %>
-				</a>
-				<br />
-				<%= queryResult[i].DescField %>
-			</li>
-		<% } %>
-	</ul>
+		<div class="row justify-content-center">
+			<% for (var i = 0; i < queryResult.length; i++) { %> 
+				<div class="card blog-cards" style="width: 18rem;">
+					<a href="/blog/category/<%= queryResult[i].BlogName %>/<%= queryResult[i].BlogID %>"> 
+							<%= queryResult[i].BlogName %>
+					</a>
+					<%= queryResult[i].DescField %>
+					<% if(i%4 == 0) {%>
+						<div class="w-100 d-none d-md-block"></div>
+					<%}%>
+				</div>
+			<% } %>
+		</div>
 	</div>
 </html>

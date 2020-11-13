@@ -15,9 +15,9 @@
 			<form action="/post/create" method="post">
 				<input type="hidden" name="BlogID" value="<%=blog.BlogID%>" >
 				<input type="hidden" name="cat_title" value="<%=blog.BlogName%>">
-				<input type="text" name="Title" placeholder="Title">
+				<input type="text" name="Title" placeholder="Title" required>
 				<br>
-				<input type="text" name="Text" placeholder="Text">
+				<input type="text" name="Text" placeholder="Text" required>
 				<br>
 				<input type="submit" value="Create Post">
 			</form>

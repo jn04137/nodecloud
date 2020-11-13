@@ -3,31 +3,64 @@
 <html>
 	<%- include('../partials/header') %>
 	<%- include('../partials/navbar') %>
-	
-	<div class="center-div">
-		<h4>User profile</h4>
-		<br>
-		<h4>User Info</h4>
-		<%= user.Email %>
-		<br>
-		<%= user.DisplayName %>
-		<br>
-		<%= user.FirstN %>
-		<br>
-		<%= user.LastN %>
-	</div>
-	<div class="center-div">
-		<h4>Posts Made</h4>
-		<% for(var i = 0; i < posts.length; i++) { %>
-			<a href="/post/post_page/<%=posts[i].PostNum%>"><%=posts[i].Title%></a>
-			<br>
-			<%=posts[i].Text%>
-		<% }%>
-	</div>
-	<div class="center-div">
-		<h4>Comments Made</h4>
-		<% for(var i = 0; i < comments.length; i++) { %>
-			<%= comments[i].Content %>
-		<% }%>
+
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="container col">
+				<h4>User profile</h4>
+				<br>
+				<h4>User Info</h4>
+				<%= user.Email %>
+				<br>
+				<%= user.DisplayName %>
+				<br>
+				<%= user.FirstN %>
+				<br>
+				<%= user.LastN %>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="container col">
+			<h4>Posts Made</h4>
+				<% for(var i = 0; i < posts.length; i++) { %>
+					<div class="card" style="width: 40rem;">
+						<a href="/post/post_page/<%=posts[i].PostNum%>"><%=posts[i].Title%></a>
+						<div class="card-text">
+							<%=posts[i].Text%>
+						</div>
+						<div class="input-group">
+							<form action="/post/delete" method="POST">
+								<input type="hidden" value="<%= posts[i].PostNum %>" name="PostNum" />
+								<input type="submit" class="btn btn-danger btn-sm" value="Delete"/>
+							</form>
+							<form action="" method="GET">
+								<input type="submit" class="btn btn-success btn-sm" value="Edit">
+							</form>
+						</div>
+					</div>
+				<% }%>
+			</div>
+		</div>
+		<div class="row justify-content-center">
+			<div class="container col">
+				<h4>Comments Made</h4>
+					<% for(var i = 0; i < comments.length; i++) { %>
+						<div class="card" style="width: 40rem;">
+							<div class="card-text">
+								<%= comments[i].Content %>
+							</div>
+							<div class="input-group">
+								<form action="/comment/delete" method="POST">
+									<input type="hidden" value="<%=comments[i].CommentID%>" name="CommentID" />
+									<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+								</form>
+								<form action="" method="GET">
+									<button type="submit" class="btn btn-success btn-sm">Edit</button>
+								</form>
+							</div>
+						</div>
+					<% }%>
+			</div>
+		</div>
 	</div>
 </html>

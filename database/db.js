@@ -61,5 +61,22 @@ con.query(comment_schema, (queryError, queryResult) => {
 	}
 });
 
+const user_report_schema = require('../models/report_model').user_report_schema;
+con.query(user_report_schema, (queryError, queryResult) => {
+	if(queryError){
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log("Table 'USER_REPORT' created");
+	}
+});
+
+const report_schema = require('../models/report_model').report_schema;
+con.query(report_schema, (queryError, queryResult) => {
+	if(queryError){
+		console.log(queryError.sqlMessage);
+	} else {
+		console.log("TABLE 'REPORT' created");
+	}
+});
 
 exports.con = con;

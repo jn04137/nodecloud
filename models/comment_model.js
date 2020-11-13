@@ -4,7 +4,7 @@ const comment_schema = "CREATE TABLE COMMENT("+
 	" PostNum INT NOT NULL," +
 	" Content LONGTEXT NOT NULL,"+
 	" PRIMARY KEY (CommentID, PostNum, Email),"+
-	" FOREIGN KEY (Email) REFERENCES USER(Email), "+
-	" FOREIGN KEY (PostNum) REFERENCES POST(PostNum))"
+	" FOREIGN KEY (Email) REFERENCES USER(Email) ON DELETE CASCADE ON UPDATE NO ACTION,"+
+	" FOREIGN KEY (PostNum) REFERENCES POST(PostNum) ON DELETE CASCADE ON UPDATE NO ACTION)"
 
 exports.comment_schema = comment_schema;

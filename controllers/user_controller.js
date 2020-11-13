@@ -4,9 +4,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 exports.user_home = (request, response) => { 
-	response.render('user/signup_login');
+	if(request.session.user){
+		response.redirect('/blog');
+	} else{
+		response.render('user/signup_login');
+	}
 }
 
+// Brings up the user's profile
+// Uses 3 queries to load user, user's posts, and user's comments
 exports.your_profile = (request, response) => {
 	let user_email = request.session.user.Email;	
 	let user_info;	
@@ -54,6 +60,7 @@ exports.user_signup = (request, response) => {
 						response.send('User with this email already exists');
 					} else{
 						console.log(queryError);
+						response.redirect('/user');
 					}
 				} else {
 					console.log('New user: ' + request.body.DisplayName + ' created');
@@ -89,6 +96,7 @@ exports.user_logout = (request, response) => {
 	request.session.destroy((err) => {
 		if(err){
 			console.log(err);
+			response.redirect('/user');
 		} else {
 			response.redirect('/user');
 		}

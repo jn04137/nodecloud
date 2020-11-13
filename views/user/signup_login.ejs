@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<%- include('../partials/header'); %>
-	<div class="center-div">
-	<form action="/user/signup" method="post">
-		<input type="text" placeholder="Email" name="Email">
-		<br>
-		<input type="text" placeholder="DisplayName" name="DisplayName">
-		<br>
-		<input type="password" placeholder="Password" name="Password">
-		<br>
-		<input type="text" placeholder="FirstN" name="FirstN">
-		<br>
-		<input type="text" placeholder="MidIInitial" name="MidInitial">
-		<br>
-		<input type="text" placeholder="LastN" name="LastN">
-		<br>
-		<input type="submit" value="Sign Up">
-	</form>
+	<div class="container">
+		<div class="row justify-content-center">
+			<form action="/user/signup" class="login-signup-form" method="post">
+				<div class="form-group">
+					<input type="email" placeholder="Email" name="Email">
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="DisplayName" name="DisplayName">
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="Password">
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="FirstN" name="FirstN">
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="MidIInitial" name="MidInitial">
+				</div>
+				<div class="form-group">
+					<input type="text" placeholder="LastN" name="LastN">
+				</div>
+				<div class="form-group horizontal-center">
+					<input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<br>
 
-	<form action="/user/login" method="post">
-		<input type="text" placeholder="Email" name="Email"> 
-		<br>
-		<input type="password" placeholder="Password" name="Password">
-		<br>
-		<input type="submit" value="Sign In">
-	</form>
+	<div class="container">
+		<div class="row justify-content-center">
+			<form action="/user/login" class="login-signup-form" method="post">
+				<div class="form-group">
+					<input type="email" placeholder="Email" name="Email"> 
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password" name="Password">
+				</div>
+				<div class="form-group horizontal-center">
+					<input type="submit" class="btn btn-primary btn-sm" value="Sign In">
+				</div>
+			</form>
+		</div>
 	</div>
 </html>
