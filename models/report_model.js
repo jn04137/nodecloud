@@ -3,7 +3,7 @@ const user_report_schema = "CREATE TABLE USER_REPORT("+
     "Serving_admin VARCHAR(100),"+
     "offending_user VARCHAR(100) NOT NULL,"+
     "PRIMARY KEY (user_reportID),"+
-    "FOREIGN KEY (Serving_admin) REFERENCES ADMIN(Email), ON DELETE NO ACTION"+
+    "FOREIGN KEY (Serving_admin) REFERENCES ADMIN(Email) ON DELETE NO ACTION,"+
     "FOREIGN KEY (offending_user) REFERENCES USER(Email) ON DELETE NO ACTION)";
 
 const report_schema = "CREATE TABLE REPORT("+
