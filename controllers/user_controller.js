@@ -74,21 +74,26 @@ exports.user_signup = (request, response) => {
 
 // This is the user sign-in controller
 exports.user_login = (request, response) => {
-	let sql_query = `SELECT * from USER where Email='${request.body.Email}'`;
+	let sql_query = `SELECT * FROM USER WHERE Email='${request.body.Email}'`;
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError) console.log(queryError.sqlMessage);
-		bcrypt.compare(request.body.Password, queryResult[0].Password, (compError, compResult) => {
-			if(compResult){
-				console.log('password matches');
-				console.log(queryResult[0]);
-				request.session.user = queryResult[0];
-				response.redirect('/blog');
-			}
-			else {
-				console.log('password does not match');
-				response.redirect('/user');
-			}
-		});	
+		if(queryResult == undefined) {
+			console.log(queryResult);	
+			response.redirect('back');
+		} else{
+			bcrypt.compare(request.body.Password, queryResult[0].Password, (compError, compResult) => {
+				if(compResult){
+					console.log('password matches');
+					console.log(queryResult[0]);
+					request.session.user = queryResult[0];
+					response.redirect('/blog');
+				}
+				else {
+					console.log('password does not match');
+					response.redirect('/user');
+				}
+			});	
+		}	
 	});
 }
 
@@ -99,6 +104,20 @@ exports.user_logout = (request, response) => {
 			response.redirect('/user');
 		} else {
 			response.redirect('/user');
+		}
+	});
+}
+
+// Can only be called from the admin page
+exports.delete_user = (request, response) => {
+	let sql_query = `DELETE FROM USER WHERE Email='${request.body.Email}'`
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError){
+			console.log(queryError.sqlMessage);
+			response.redirect('/admin');
+		} else {
+			console.log(`User ${queryResult[0].Email} was successfully deleted`);
+			response.redirect('/back');
 		}
 	});
 }

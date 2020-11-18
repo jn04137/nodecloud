@@ -5,8 +5,6 @@ const user_schema = "CREATE TABLE USER(" +
 	" FirstN VARCHAR(20) NOT NULL,"+
 	" MidInitial CHAR,"+
 	" LastN VARCHAR(20) NOT NULL,"+
-	" Signature VARCHAR(255),"+
-	" PostCount INT,"+
 	" PRIMARY KEY (Email))";
 
 const credentials_schema = "CREATE TABLE CREDENTIALS("+

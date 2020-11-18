@@ -1,4 +1,7 @@
 const mysql = require('mysql2');
+const bcrypt = require('bcrypt');
+
+const saltRounds = 10;
 
 const con = mysql.createConnection({
 	host: process.env.DB_HOST,
@@ -75,8 +78,67 @@ con.query(report_schema, (queryError, queryResult) => {
 	if(queryError){
 		console.log(queryError.sqlMessage);
 	} else {
-		console.log("TABLE 'REPORT' created");
+		console.log("TABLE 'POST_REPORT' created");
 	}
 });
+
+function create_user(Email, DisplayName, Password, FirstN, MidInitial, LastN, database, bcrypt){
+	bcrypt.genSalt(saltRounds, (err, salt) => {
+		bcrypt.hash(Password, salt, (err, hash)=> {
+		let default_admin = `INSERT INTO USER(Email, DisplayName, Password, FirstN, MidInitial, LastN) VALUES ('${Email}', '${DisplayName}', '${hash}', '${FirstN}', '${MidInitial}', '${LastN}')`;
+			database.query(default_admin, (queryError, queryResult)=> {
+				if(queryError) {
+					console.log(queryError.sqlMessage);
+					console.log("Admin User was not created or already exists in USER table");
+				} else{
+					console.log("Admin user was added to user table");
+				}
+			});
+		});
+	});
+}
+create_user('jnganguyen3@gmail.com', 'wthunder', 'password', 'Jonathan', 'N', 'Nguyen', con, bcrypt);
+
+bcrypt.genSalt(saltRounds, (err, salt) => {
+	bcrypt.hash('password', salt, (err, hash)=> {
+	let default_admin = `INSERT INTO USER(Email, DisplayName, Password, FirstN, MidInitial, LastN) VALUES ('admin@cloudhealth.com', 'Admin', '${hash}', 'Admin', 'A', 'Admin')`;
+		con.query(default_admin, (queryError, queryResult)=> {
+			if(queryError) {
+				console.log(queryError.sqlMessage);
+				console.log("Admin User was not created or already exists in USER table");
+			} else{
+				console.log("Admin user was added to user table");
+			}
+		});
+	});
+});
+
+function createBlogs(BlogName, Description, database){
+	let sql_query = `INSERT INTO BLOG(BlogName, DescField) VALUES ('${BlogName}', '${Description}')`
+	database.query(sql_query, (queryError, queryResult) => {
+		if (queryError){
+			console.log(`${BlogName} Table Already Exists or Failed to be created`);
+		} else {
+			console.log(`${BlogName} Blog was successfully created`);
+		}
+	});
+}
+
+createBlogs("Cardiology", "This is the place to post about heart stuff.", con);
+createBlogs("General", "This is the place to post about general stuff.", con);
+createBlogs("Osteology", "This is the place to post about bone stuff.", con);
+createBlogs("Cancer Research", "This is the place to post about cancer research.", con);
+
+setTimeout(()=>{
+	let sql_query = `INSERT INTO ADMIN(Email) VALUES ('admin@cloudhealth.com')`;
+	con.query(sql_query, (queryError, queryResult) => {
+		if(queryError) {
+			console.log(queryError.sqlMessage);
+			console.log("Admin User was not added to admin");
+		} else{
+			console.log("Admin User successfully added to Admin table");
+		}
+	});
+}, 3000)
 
 exports.con = con;

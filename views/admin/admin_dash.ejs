@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 
 <html>
+	<head>
+		<%- include('../partials/header') %>
+		<%- include('../partials/navbar') %>
+	</head>
 	<p>Hello admin, <%= user.DisplayName %>.</p>
 
 	<p>Create a blog!</p>
@@ -9,6 +13,33 @@
 		<br>
 		<input type="text" placeholder="DescField" name="DescField">
 		<br>
-		<input type="submit" value="Make Blog">
+		<input type="submit" class="btn btn-success btn-sm" value="Make Blog">
 	</form>
+
+	<h3>Reported Posts</h3>
+	<% for(let i=0; i<posts.length; i++) {%>
+		<div class="card" style="width: 18rem;">
+			<div class="card-text">
+				Total Reports: <%= posts[i].total%>
+			</div>
+			<div class="card-text">
+				Link to offending post: <a href="/post/post_page/<%=posts[i].offending_post%>">
+					<%= posts[i].offending_post%>
+				</a> 
+			</div>
+			<form action="/post/delete" method="POST">
+				<input type="hidden" name="PostNum" value="<%=posts[i].offending_post%>"/>
+				<input type="submit" class="btn btn-danger btn-sm" value="Delete Offending Post" />
+			</form>
+		</div>
+	<%}%>
+
+	<h3>Reported Users</h3>
+	<% for(let i=0; i<users.length; i++) { %>
+		<div class="card" style="width: 18rem;">
+			Total Reports: <%= users[i].total %> 
+			<br>
+			User Email: <%= users[i].offending_user %>
+		</div>
+	<% }%>
 </html>

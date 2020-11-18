@@ -19,20 +19,21 @@
 				<br>
 				<input type="text" name="Text" placeholder="Text" required>
 				<br>
-				<input type="submit" value="Create Post">
+				<input type="submit" class="btn btn-success btn-sm" value="Create Post">
 			</form>
 			
 			<br>
 			
 			<h3>Posts</h3>
 			<% for(var i = 0; i < posts.length; i++) { %> 
-				<br>
-				<a href="/post/post_page/<%=posts[i].PostNum%>"><%= posts[i].Title%></a>	
-				<br>
-				<%= posts[i].Text %>
-				<br>
-				Created by <%= posts[i].Email %>
-				<br>
+				<div class="card" style="width: 40rem;">
+					<a href="/post/post_page/<%=posts[i].PostNum%>"><%= posts[i].Title%></a>	
+					<%= posts[i].Text %>
+					<br>
+					Created by <%= posts[i].Email %>
+					<br>
+					Timestamp: <%= new Date(posts[i].Time) %>	
+				</div>
 			<% } %>
 		</body>
 

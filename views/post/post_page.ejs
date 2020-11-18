@@ -9,21 +9,33 @@
 		<div class="center-div">
 			<h3><%= post_info.Title %></h3>
 			<p><%=post_info.Text%></p>
+			<form action="/report/create_post_report" method="POST">
+				<input type="hidden" name="Email" value=<%=post_info.Email%>>
+				<input type="hidden" name="PostNum" value=<%=post_info.PostNum%>>
+				<input type="submit" value="Report Post" class="btn btn-danger btn-sm">
+			</form>
+			<form action="/report/create_user_report" method="POST">
+				<input type="hidden" name="Email" value=<%=post_info.Email%>>
+				<input type="submit" value="Report User" class="btn btn-danger btn-sm">
+			</form>
 
-			<form action="/comment/create" method="post">
+			<form action="/comment/create" method="POST">
 				<input type="hidden" name="PostNum" value=<%=post_info.PostNum%>>
 				<input type="text" placeholder="Content" name="Content">
 				<br>
-				<input type="submit" value="Create Comment">
+				<input type="submit" value="Create Comment" class="btn btn-primary btn-sm">
 			</form>
 
 			<br>
 
-			<% for(var i = 0; i < comments.length; i++) { %> 
-				<%= comments[i].Content %>
-				<br>
-				<%= comments[i].Email %>
-				<br>	
+			<% for(let i = 0; i < comments.length; i++) { %> 
+				<div class="card" style="width: 40rem;">
+					<%= comments[i].Content %>
+					<br>
+					<%= comments[i].Email %>
+					<br>
+					<%= comments[i].Time %>
+				</div>
 			<% } %>
 		</div>
 	</body>

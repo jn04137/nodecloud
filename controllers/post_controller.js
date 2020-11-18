@@ -1,9 +1,9 @@
 const database = require('../database/db').con;
 
 exports.create_post = (request, response) => {
-	console.log(request.body.Text);
-	console.log(request.body.Title);
-	let sql_query = `INSERT INTO POST(Email, BlogID, Title, Text) VALUES ('${request.session.user.Email}', '${request.body.BlogID}', '${request.body.Title}', "${request.body.Text}")`;
+	let d = new Date();
+	let date = `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
+	let sql_query = `INSERT INTO POST(Email, BlogID, Title, Text, Time) VALUES ('${request.session.user.Email}', '${request.body.BlogID}', '${request.body.Title}', "${request.body.Text}", '${date}')`;
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);
@@ -21,7 +21,7 @@ exports.delete_post = (request, response) => {
 			console.log(queryError.sqlsqlMessage);
 		} else {
 			console.log('Post was successfully deleted');
-			response.redirect('/user/your_profile');
+			response.redirect('back');
 		}
 	});
 }
@@ -43,7 +43,8 @@ exports.post_page = (request, response) => {
 				} else {
 					response.render('post/post_page', {
 						post_info, 
-						comments: queryResult
+						comments: queryResult,
+						user: request.session.user,
 					});
 				}
 			})

@@ -1,8 +1,10 @@
 const database = require('../database/db').con;
 
 exports.create_comment = (request, response) => {
-	console.log(request.session.user);
-	let sql_query = `INSERT INTO COMMENT(Email, PostNum, Content) VALUES ('${request.session.user.Email}', ${request.body.PostNum}, '${(request.body.Content).replace("'", "''")}')`
+	let d = new Date();
+	let date = `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
+
+	let sql_query = `INSERT INTO COMMENT(Email, PostNum, Content, Time) VALUES ('${request.session.user.Email}', ${request.body.PostNum}, '${(request.body.Content).replace("'", "''")}', '${date}')`
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);

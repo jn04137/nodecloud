@@ -44,6 +44,7 @@ app.use('/blog', require('./routes/blog_router'));
 app.use('/comment', require('./routes/comment_router'));
 app.use('/admin', require('./routes/admin_router'));
 app.use('/post', require('./routes/post_router'));
+app.use('/report', require('./routes/report_router'));
 
 app.get('/', (request, response) => {
 	response.redirect('/user');
