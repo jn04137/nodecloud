@@ -3,7 +3,7 @@ const database = require('../database/db').con;
 exports.create_post = (request, response) => {
 	let d = new Date();
 	let date = `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
-	let sql_query = `INSERT INTO POST(Email, BlogID, Title, Text, Time) VALUES ('${request.session.user.Email}', '${request.body.BlogID}', '${request.body.Title}', "${request.body.Text}", '${date}')`;
+	let sql_query = `INSERT INTO POST(Email, BlogID, Title, Text, Time) VALUES ('${request.session.user.Email}', '${request.body.BlogID}', '${(request.body.Title).replace("'", "''")}', '${(request.body.Text).replace("'", "''")}', '${date}')`;
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);
@@ -18,7 +18,7 @@ exports.delete_post = (request, response) => {
 	console.log(request.body.PostNum);
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
-			console.log(queryError.sqlsqlMessage);
+			console.log(queryError.sqlMessage);
 		} else {
 			console.log('Post was successfully deleted');
 			response.redirect('back');

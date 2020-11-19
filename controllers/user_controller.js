@@ -116,8 +116,8 @@ exports.delete_user = (request, response) => {
 			console.log(queryError.sqlMessage);
 			response.redirect('/admin');
 		} else {
-			console.log(`User ${queryResult[0].Email} was successfully deleted`);
-			response.redirect('/back');
+			console.log(`User ${request.body.Email} was successfully deleted`);
+			response.redirect('back');
 		}
 	});
 }

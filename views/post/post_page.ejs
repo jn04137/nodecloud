@@ -2,15 +2,16 @@
 <html>
 	<head>
 		<title> <%=post_info.Title %> </title>
+		<%- include('../partials/header') %>
+		<%- include('../partials/navbar') %>
 	</head>
-	<%- include('../partials/header') %>
-	<%- include('../partials/navbar') %>
 	<body>
 		<div class="center-div">
-			<h3><%= post_info.Title %></h3>
-			<p><%=post_info.Text%></p>
+			<div class="jumbotron">
+				<h3><%= post_info.Title %></h3>
+				<p><%=post_info.Text%></p>
+			</div>
 			<form action="/report/create_post_report" method="POST">
-				<input type="hidden" name="Email" value=<%=post_info.Email%>>
 				<input type="hidden" name="PostNum" value=<%=post_info.PostNum%>>
 				<input type="submit" value="Report Post" class="btn btn-danger btn-sm">
 			</form>

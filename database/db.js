@@ -123,11 +123,30 @@ function createBlogs(BlogName, Description, database){
 		}
 	});
 }
+function createPost(PostNum, Email, BlogID, Title, Text, database){
+	let d = new Date();
+	let date = `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
+
+	let sql_query = `INSERT INTO POST(PostNum, Email, BlogID, Title, Text, Time) VALUES ('${PostNum}','${Email}', '${BlogID}', '${Title}', "${Text}", '${date}')`;
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError){
+			console.log(queryError.sqlMessage);
+		} else {
+			console.log("Post was created successfully!");
+		}
+	});
+}
 
 createBlogs("Cardiology", "This is the place to post about heart stuff.", con);
 createBlogs("General", "This is the place to post about general stuff.", con);
 createBlogs("Osteology", "This is the place to post about bone stuff.", con);
 createBlogs("Cancer Research", "This is the place to post about cancer research.", con);
+
+createPost(1, "jnganguyen3@gmail.com", 1, "First Post in Cardio", "This is the content of the post", con);
+createPost(2, "jnganguyen3@gmail.com", 1, "Cool Title", "This is just more filler", con);
+createPost(3, "jnganguyen3@gmail.com", 2, "First Post in General", "This is the content of the first general post", con);
+createPost(4, "admin@cloudhealth.com", 3, "Admin Made Post", "This is a post made by the admin", con);
+createPost(5, "jnganguyen3@gmail.com", 4, "First Post in Cancer Research", "This is the first post in cancer research!", con);
 
 setTimeout(()=>{
 	let sql_query = `INSERT INTO ADMIN(Email) VALUES ('admin@cloudhealth.com')`;

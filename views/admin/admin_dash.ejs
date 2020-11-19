@@ -18,7 +18,7 @@
 
 	<h3>Reported Posts</h3>
 	<% for(let i=0; i<posts.length; i++) {%>
-		<div class="card" style="width: 18rem;">
+		<div class="card" style="width: 40rem;">
 			<div class="card-text">
 				Total Reports: <%= posts[i].total%>
 			</div>
@@ -28,7 +28,7 @@
 				</a> 
 			</div>
 			<form action="/post/delete" method="POST">
-				<input type="hidden" name="PostNum" value="<%=posts[i].offending_post%>"/>
+				<input type="hidden" name="PostNum" value="<%=posts[i].offending_post%>" />
 				<input type="submit" class="btn btn-danger btn-sm" value="Delete Offending Post" />
 			</form>
 		</div>
@@ -36,10 +36,16 @@
 
 	<h3>Reported Users</h3>
 	<% for(let i=0; i<users.length; i++) { %>
-		<div class="card" style="width: 18rem;">
+		<div class="card" style="width: 40rem;">
 			Total Reports: <%= users[i].total %> 
 			<br>
 			User Email: <%= users[i].offending_user %>
+			<br>
+			<form action="/user/user_delete" method="POST">
+				<input type="hidden" name="Email" value="<%= users[i].offending_user%>" />
+				<input type="submit" value="Delete Offending User" class="btn btn-danger btn-sm" />
+			</form>
+		
 		</div>
 	<% }%>
 </html>

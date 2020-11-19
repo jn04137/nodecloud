@@ -9,8 +9,10 @@
 		<%- include('../partials/header') %>
 		<%- include('../partials/navbar') %>
 		<div class="center-div">
-			<h3><%= blog.BlogName %></h3>
-			<p>Blog Description: <%=blog.DescField%></p>
+			<div class="jumbotron">
+				<h3><%= blog.BlogName %></h3>
+				<p>Blog Description: <%=blog.DescField%></p>
+			</div>
 			<p>Create a post!</p>
 			<form action="/post/create" method="post">
 				<input type="hidden" name="BlogID" value="<%=blog.BlogID%>" >

@@ -4,7 +4,7 @@ exports.create_comment = (request, response) => {
 	let d = new Date();
 	let date = `${d.getUTCFullYear()}-${d.getUTCMonth()+1}-${d.getUTCDate()} ${d.getUTCHours()}:${d.getUTCMinutes()}:${d.getUTCSeconds()}`;
 
-	let sql_query = `INSERT INTO COMMENT(Email, PostNum, Content, Time) VALUES ('${request.session.user.Email}', ${request.body.PostNum}, '${(request.body.Content).replace("'", "''")}', '${date}')`
+	let sql_query = `INSERT INTO COMMENT(Email, PostNum, Content) VALUES ('${request.session.user.Email}', ${request.body.PostNum}, '${(request.body.Content).replace("'", "''")}')`
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError){
 			console.log(queryError.sqlMessage);

@@ -13,7 +13,7 @@ exports.create_user_report = (request, response) => {
 }
 
 exports.create_post_report = (request, response) => {
-	let sql_query = `INSERT INTO POST_REPORT(offending_user, offending_post) VALUE ('${request.body.Email}', ${request.body.PostNum})`
+	let sql_query = `INSERT INTO POST_REPORT(offending_post) VALUE ('${request.body.PostNum}')`
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError) console.log(queryError.sqlMessage);
 		else {
