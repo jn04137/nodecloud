@@ -35,18 +35,21 @@ exports.admin_login = (request, response) => {
 			console.log(queryError.sqlMessage);
 			response.redirect('back');
 		} else {
-			if(queryResult[0] == undefined) response.redirect('/user');
-			bcrypt.compare(request.body.Password, queryResult[0].Password, (compError, compResult) => {
-				if(compResult){
-					console.log('Password matches');
-					console.log(queryResult[0]);
-					request.session.user = queryResult[0];
-					response.redirect('/admin');
-				} else {
-					console.log('Password does not match');
-					response.redirect('/back');
-				}
-			});
+			if(queryResult[0] === undefined){
+				response.redirect('/user');
+			} else {
+				bcrypt.compare(request.body.Password, queryResult[0].Password, (compError, compResult) => {
+					if(compResult){
+						console.log('Password matches');
+						console.log(queryResult[0]);
+						request.session.user = queryResult[0];
+						response.redirect('/admin');
+					} else {
+						console.log('Password does not match');
+						response.redirect('/back');
+					}
+				});
+			} 
 		}
 	});	
 }

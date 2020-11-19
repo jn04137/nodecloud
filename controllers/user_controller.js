@@ -77,7 +77,7 @@ exports.user_login = (request, response) => {
 	let sql_query = `SELECT * FROM USER WHERE Email='${request.body.Email}'`;
 	database.query(sql_query, (queryError, queryResult) => {
 		if(queryError) console.log(queryError.sqlMessage);
-		if(queryResult == undefined) {
+		if(queryResult[0] === undefined) {
 			console.log(queryResult);	
 			response.redirect('back');
 		} else{
