@@ -97,7 +97,6 @@ function create_user(Email, DisplayName, Password, FirstN, MidInitial, LastN, da
 		});
 	});
 }
-create_user('jnganguyen3@gmail.com', 'wthunder', 'password', 'Jonathan', 'N', 'Nguyen', con, bcrypt);
 
 bcrypt.genSalt(saltRounds, (err, salt) => {
 	bcrypt.hash('password', salt, (err, hash)=> {
@@ -137,6 +136,44 @@ function createPost(PostNum, Email, BlogID, Title, Text, database){
 	});
 }
 
+function createComment(CommentID, Email, PostNum, Content, database){
+	sql_query = `INSERT INTO COMMENT VALUES('${CommentID}', '${Email}', '${PostNum}', '${Content}')`;
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError) {
+			console.log(queryError.sqlMessage);
+			console.log("Comment probably already exists");
+		}
+		else{
+			console.log("Comment created successfully!");
+		}
+	})
+}
+function createUserReport(user_reportID, offending_user, database){
+	let sql_query = `INSERT INTO USER_REPORT VALUES (${user_reportID}, '${offending_user}')`
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError) {
+			console.log(queryError.sqlMessage);
+			console.log("User report probably already exists!");
+		}else {
+			console.log("User report created!");
+		}
+	});
+}
+
+function createPostReport(reportID, offending_post, database){
+	let sql_query = `INSERT INTO POST_REPORT VALUES (${reportID}, '${offending_post}')`;
+	database.query(sql_query, (queryError, queryResult) => {
+		if(queryError){
+			console.log(queryError.sqlMessage);
+			console.log("Post report probably already exists");
+		} else {
+			console.log("Post report created!");
+		}
+	});
+}
+
+create_user('jnganguyen3@gmail.com', 'wthunder', 'password', 'Jonathan', 'N', 'Nguyen', con, bcrypt);
+create_user('jn04137@georgiasouthern.edu', 'thunder45', 'password', 'John', 'J', 'Ngu', con, bcrypt);
 createBlogs("Cardiology", "This is the place to post about heart stuff.", con);
 createBlogs("General", "This is the place to post about general stuff.", con);
 createBlogs("Osteology", "This is the place to post about bone stuff.", con);
@@ -147,6 +184,11 @@ createPost(2, "jnganguyen3@gmail.com", 1, "Cool Title", "This is just more fille
 createPost(3, "jnganguyen3@gmail.com", 2, "First Post in General", "This is the content of the first general post", con);
 createPost(4, "admin@cloudhealth.com", 3, "Admin Made Post", "This is a post made by the admin", con);
 createPost(5, "jnganguyen3@gmail.com", 4, "First Post in Cancer Research", "This is the first post in cancer research!", con);
+createComment(1, "jnganguyen3@gmail.com", 2, "Filler comment for the filler post.", con);
+createComment(2, "admin@cloudhealth.com", 2, "This comment was made by the admin user.", con);
+createComment(3, "jn04137@georgiasouthern.edu", 4, "Wow, very interesting!", con);
+createUserReport(1, "jnganguyen3@gmail.com", con);
+createPostReport(1, 2, con);
 
 setTimeout(()=>{
 	let sql_query = `INSERT INTO ADMIN(Email) VALUES ('admin@cloudhealth.com')`;
